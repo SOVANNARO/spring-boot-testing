@@ -144,4 +144,23 @@ public class EmployeeRepositoryTests {
         // then - verify the output or result
         Assertions.assertThat(employeeById).isNotNull();
     }
+
+    // JUnit test for custom JPQL query operator
+    @DisplayName("JUnit test for custom JPQL query operator")
+    @Test
+    public void giveEmployeeObject_whenFindByJPQL_thenReturnEmployeeObject() {
+        // given - precondition or setup
+        Employee employee = Employee.builder()
+               .firstName("John")
+               .lastName("Doe")
+               .email("john.doe")
+               .build();
+        employeeRepository.save(employee);
+
+        // when - action or behavior then we are going to test
+        Employee employeeByJPQL = employeeRepository.findByJPQL("John", "Doe");
+
+        // then - verify the output or result
+        Assertions.assertThat(employeeByJPQL).isNotNull();
+    }
 }
